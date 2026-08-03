@@ -1,0 +1,4 @@
+using System.Windows.Input;
+namespace Xbox360DeploymentToolkit.ViewModels;
+public sealed class RelayCommand(Action execute, Func<bool>? can = null) : ICommand { public event EventHandler? CanExecuteChanged; public bool CanExecute(object? p) => can?.Invoke() ?? true; public void Execute(object? p) => execute(); public void Refresh() => CanExecuteChanged?.Invoke(this, EventArgs.Empty); }
+public sealed class AsyncCommand(Func<Task> execute, Action<Exception>? error = null) : ICommand { private bool _busy; public event EventHandler? CanExecuteChanged; public bool CanExecute(object? p) => !_busy; public async void Execute(object? p) { _busy = true; CanExecuteChanged?.Invoke(this, EventArgs.Empty); try { await execute(); } catch (Exception ex) { error?.Invoke(ex); } finally { _busy = false; CanExecuteChanged?.Invoke(this, EventArgs.Empty); } } }
