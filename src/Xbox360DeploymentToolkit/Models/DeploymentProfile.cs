@@ -9,6 +9,8 @@ public sealed class DeploymentProfile
     public string RghConfirmation { get; set; } = "Sin confirmar";
     public string KernelVersion { get; set; } = "Sin confirmar";
     public string NandStatus { get; set; } = "No disponible";
+    public bool UnverifiedRiskAccepted { get; set; }
+    public string VerificationDecision { get; set; } = "Verificación pendiente";
     public string LiveStatus { get; set; } = "Sin confirmar";
     public string InstallationMode { get; set; } = "Instalación limpia";
     public string ExistingComponents { get; set; } = "";

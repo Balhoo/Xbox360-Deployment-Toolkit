@@ -16,6 +16,8 @@ public partial class DeploymentWizardWindow : Window
     public static string OnboardingMarker => Path.Combine(DataRoot, "onboarding.seen");
     private readonly ObservableCollection<WizardComponent> _components = [];
     private readonly ObservableCollection<CatalogGame> _games = [];
+    private bool _unverifiedRiskAccepted;
+    private string _verificationDecision = "Verificación pendiente";
 
     public DeploymentWizardWindow()
     {
@@ -45,9 +47,16 @@ public partial class DeploymentWizardWindow : Window
     private bool AssessConsole()
     {
         var confirmation = Value(RghConfirmationBox); var hack = Value(HackTypeBox); var live = Value(LiveStatusBox); var kernel = KernelVersionBox.Text.Trim();
-        if (confirmation == "No ejecuta XeLL ni homebrew") { CompatibilityText.Text = "Lo sentimos: no podemos confirmar una consola RGH funcional. Este toolkit no instala el hack físico. Puedes volver después de una evaluación técnica o con una NAND y CPU Key analizables."; CompatibilityBanner.Background = System.Windows.Media.Brushes.MistyRose; MessageBox.Show(CompatibilityText.Text, "RGH no confirmado", MessageBoxButton.OK, MessageBoxImage.Warning); return false; }
-        if (confirmation.StartsWith("Sin confirmar") || confirmation.StartsWith("Pendiente")) { CompatibilityText.Text = "El deployment puede planificarse, pero cualquier escritura o instalación quedará condicionada a confirmar XeLL/homebrew o analizar NAND + CPU Key."; CompatibilityBanner.Background = System.Windows.Media.Brushes.LemonChiffon; }
-        else { CompatibilityText.Text = $"RGH/JTAG funcional confirmado por software. El subtipo físico ({hack}) no es necesario para preparar almacenamiento, Aurora y FTP."; CompatibilityBanner.Background = System.Windows.Media.Brushes.Honeydew; }
+        var verified = confirmation.StartsWith("Confirmado:");
+        if (!verified && !_unverifiedRiskAccepted)
+        {
+            var gate = new VerificationGateWindow { Owner = this }; gate.ShowDialog();
+            if (gate.Result == VerificationGateResult.SafeVerification) { _verificationDecision = "El usuario eligió verificación segura"; CompatibilityText.Text = "Verificación segura pendiente: arranca XeLL con Eject o analiza NAND + CPU Key en modo lectura. Actualiza la respuesta cuando tengas evidencia."; CompatibilityBanner.Background = System.Windows.Media.Brushes.LemonChiffon; return false; }
+            if (gate.Result != VerificationGateResult.AcceptRisk) return false;
+            _unverifiedRiskAccepted = true; _verificationDecision = "Continuación bajo responsabilidad con RGH no verificado";
+        }
+        if (!verified) { CompatibilityText.Text = "RGH no verificado: puedes preparar requisitos, pero el perfil registra la aceptación de riesgo y las operaciones deben conservar dry-run hasta verificar XeLL/homebrew o NAND + CPU Key."; CompatibilityBanner.Background = System.Windows.Media.Brushes.MistyRose; }
+        else { _unverifiedRiskAccepted = false; _verificationDecision = "RGH confirmado por software"; CompatibilityText.Text = $"RGH/JTAG funcional confirmado por software. El subtipo físico ({hack}) no es necesario para preparar almacenamiento, Aurora y FTP."; CompatibilityBanner.Background = System.Windows.Media.Brushes.Honeydew; }
         CompatibilityText.Text += string.IsNullOrWhiteSpace(kernel) || kernel == "Sin confirmar" ? " La versión de kernel deberá registrarse durante la auditoría." : $" Kernel registrado: {kernel}.";
         if (live == "Baneada") CompatibilityText.Text += " La consola reportada como baneada puede seguir usando funciones locales; los servicios de Xbox Live no forman parte del deployment.";
         else CompatibilityText.Text += " No conectes una consola modificada a Xbox Live basándote en este diagnóstico; el toolkit no garantiza evitar sanciones.";
@@ -61,11 +70,11 @@ public partial class DeploymentWizardWindow : Window
 
     private DeploymentProfile BuildProfile() => new()
     {
-        ConsoleModel = Value(ConsoleModelBox), InternalCapacity = Value(InternalCapacityBox), HackType = Value(HackTypeBox), RghConfirmation = Value(RghConfirmationBox), KernelVersion = KernelVersionBox.Text.Trim(), NandStatus = Value(NandStatusBox), LiveStatus = Value(LiveStatusBox), InstallationMode = Value(InstallationModeBox), ExistingComponents = ExistingComponentsBox.Text.Trim(),
+        ConsoleModel = Value(ConsoleModelBox), InternalCapacity = Value(InternalCapacityBox), HackType = Value(HackTypeBox), RghConfirmation = Value(RghConfirmationBox), KernelVersion = KernelVersionBox.Text.Trim(), NandStatus = Value(NandStatusBox), UnverifiedRiskAccepted = _unverifiedRiskAccepted, VerificationDecision = _verificationDecision, LiveStatus = Value(LiveStatusBox), InstallationMode = Value(InstallationModeBox), ExistingComponents = ExistingComponentsBox.Text.Trim(),
         UseUsb = UseUsbCheck.IsChecked == true, UsbCapacityGb = int.TryParse(UsbCapacityBox.Text, out var gb) ? gb : 0, UseExternalStorage = UseExternalCheck.IsChecked == true, ExternalCapacity = ExternalCapacityBox.Text.Trim(), UsePcLibrary = UsePcCheck.IsChecked == true, PcLibraryPath = PcLibraryPathBox.Text.Trim(),
         SelectedComponents = _components.Where(x => x.Selected).Select(x => x.Id).ToList(), ComponentFiles = _components.Where(x => !string.IsNullOrWhiteSpace(x.LocalFile)).ToDictionary(x => x.Id, x => x.LocalFile), SelectedGames = _games.Where(x => x.Selected).Select(x => x.Title).ToList(), OnboardingCompleted = true
     };
-    private void BuildSummary() { var p = BuildProfile(); var sb = new StringBuilder(); sb.AppendLine($"Consola: {p.ConsoleModel} · {p.InternalCapacity}").AppendLine($"Confirmación RGH: {p.RghConfirmation}").AppendLine($"Kernel: {p.KernelVersion} · NAND: {p.NandStatus}").AppendLine($"Subtipo opcional: {p.HackType} · Live: {p.LiveStatus}").AppendLine($"Alcance: {p.InstallationMode}").AppendLine($"USB: {(p.UseUsb ? p.UsbCapacityGb + " GB" : "No")}").AppendLine($"Externo: {(p.UseExternalStorage ? p.ExternalCapacity : "No")}").AppendLine($"Biblioteca PC: {(p.UsePcLibrary ? p.PcLibraryPath : "No")}").AppendLine().AppendLine("Componentes:").AppendLine(string.Join("\n", _components.Where(x => x.Selected).Select(x => "• " + x.Name))).AppendLine().AppendLine("Juegos:").AppendLine(p.SelectedGames.Count == 0 ? "• Ninguno por ahora" : string.Join("\n", p.SelectedGames.Select(x => "• " + x))); SummaryText.Text = sb.ToString(); }
+    private void BuildSummary() { var p = BuildProfile(); var sb = new StringBuilder(); sb.AppendLine($"Consola: {p.ConsoleModel} · {p.InternalCapacity}").AppendLine($"Confirmación RGH: {p.RghConfirmation}").AppendLine($"Decisión: {p.VerificationDecision}").AppendLine($"Kernel: {p.KernelVersion} · NAND: {p.NandStatus}").AppendLine($"Subtipo opcional: {p.HackType} · Live: {p.LiveStatus}").AppendLine($"Alcance: {p.InstallationMode}").AppendLine($"USB: {(p.UseUsb ? p.UsbCapacityGb + " GB" : "No")}").AppendLine($"Externo: {(p.UseExternalStorage ? p.ExternalCapacity : "No")}").AppendLine($"Biblioteca PC: {(p.UsePcLibrary ? p.PcLibraryPath : "No")}").AppendLine().AppendLine("Componentes:").AppendLine(string.Join("\n", _components.Where(x => x.Selected).Select(x => "• " + x.Name))).AppendLine().AppendLine("Juegos:").AppendLine(p.SelectedGames.Count == 0 ? "• Ninguno por ahora" : string.Join("\n", p.SelectedGames.Select(x => "• " + x))); SummaryText.Text = sb.ToString(); }
     private void Finish_Click(object sender, RoutedEventArgs e)
     {
         var profile = BuildProfile(); Directory.CreateDirectory(DataRoot); new JsonStore().Save(ProfilePath, profile); MarkSeen();
