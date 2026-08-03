@@ -54,5 +54,9 @@ Los datos del usuario, credenciales protegidas, logs y reportes se guardan en `%
 - `ViewModels`: coordinación de la interfaz y comandos.
 - `Configuration`: procedimiento, catálogo y ajustes externos.
 - `MainWindow.xaml`: vista WPF sin lógica operativa.
+- `EmbeddedWizardView`: onboarding, perfil y confirmación RGH dentro del único AppShell.
+- `Presentation/Themes`: tokens y estilos del Design System oscuro.
+
+La aplicación utiliza una sola ventana. Confirmaciones y feedback se muestran mediante overlays y toasts internos; solo los selectores nativos de archivos/carpetas pueden abrirse aparte.
 
 Consulta [docs/SECURITY.md](docs/SECURITY.md) y [docs/PORTFOLIO.md](docs/PORTFOLIO.md).

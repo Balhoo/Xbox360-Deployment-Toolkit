@@ -46,6 +46,10 @@ Durante la migración, `MainViewModel` puede actuar como fuente de verdad. Los n
 
 ## AppShell
 
+### Regla de una sola ventana
+
+XDT utiliza una única ventana de aplicación. Onboarding, wizard, verificación RGH, inspectores, confirmaciones, avisos y errores se presentan dentro del `AppShell` mediante páginas, drawers, overlays y toasts. No se crean ventanas WPF secundarias. Las únicas excepciones son los selectores nativos de Windows para elegir archivos o carpetas y el navegador externo cuando el usuario abre explícitamente una fuente verificada.
+
 ### Regiones
 
 ```text
@@ -362,4 +366,3 @@ Antes y después de cada fase:
 - La documentación lateral de la referencia no vivirá permanentemente dentro del workspace; se resolverá mediante ayuda contextual y documentación separada.
 - Funciones aún no implementadas —hash remoto, pause/resume FTP, covers automáticos— no aparecerán como controles activos.
 - El flujo se reduce a agrupaciones comprensibles sin ocultar ninguna capacidad existente.
-
