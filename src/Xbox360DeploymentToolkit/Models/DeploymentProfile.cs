@@ -6,6 +6,9 @@ public sealed class DeploymentProfile
     public string ConsoleModel { get; set; } = "Sin confirmar";
     public string InternalCapacity { get; set; } = "Sin confirmar";
     public string HackType { get; set; } = "Sin confirmar";
+    public string RghConfirmation { get; set; } = "Sin confirmar";
+    public string KernelVersion { get; set; } = "Sin confirmar";
+    public string NandStatus { get; set; } = "No disponible";
     public string LiveStatus { get; set; } = "Sin confirmar";
     public string InstallationMode { get; set; } = "Instalación limpia";
     public string ExistingComponents { get; set; } = "";
