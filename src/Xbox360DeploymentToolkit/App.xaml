@@ -1,4 +1,4 @@
-<Application x:Class="Xbox360DeploymentToolkit.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" StartupUri="MainWindow.xaml">
+<Application x:Class="Xbox360DeploymentToolkit.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <Application.Resources>
     <SolidColorBrush x:Key="Accent" Color="#107C10"/>
     <Style TargetType="Button"><Setter Property="Padding" Value="12,7"/><Setter Property="Margin" Value="4"/><Setter Property="MinWidth" Value="90"/></Style>

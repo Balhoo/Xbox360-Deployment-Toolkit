@@ -1,0 +1,50 @@
+{
+  "Components": [
+    {
+      "Id": "aurora",
+      "Name": "Aurora Dashboard",
+      "Purpose": "Dashboard principal, exploración de contenido y servidor FTP.",
+      "SourceUrl": "https://xboxunity.net/",
+      "SourceLabel": "XboxUnity — fuente comunitaria del ecosistema Aurora",
+      "CompatibilityNote": "Verifica versión, integridad y compatibilidad antes de instalar. No es software oficial de Microsoft.",
+      "Required": true
+    },
+    {
+      "Id": "dashlaunch",
+      "Name": "DashLaunch",
+      "Purpose": "Inicio del dashboard y configuración de comportamiento de la consola.",
+      "SourceUrl": "",
+      "SourceLabel": "Fuente original vigente no verificada por el toolkit",
+      "CompatibilityNote": "Debe coincidir con el kernel. El asistente acepta un archivo propio, pero no enlaza mirrors no comprobados.",
+      "Required": false
+    },
+    {
+      "Id": "xexmenu",
+      "Name": "XeXMenu o gestor equivalente",
+      "Purpose": "Acceso inicial a archivos si Aurora aún no está disponible.",
+      "SourceUrl": "",
+      "SourceLabel": "Fuente original vigente no verificada por el toolkit",
+      "CompatibilityNote": "Opcional si ya existe un gestor funcional. Proporciona únicamente un archivo cuya procedencia conozcas.",
+      "Required": false
+    },
+    {
+      "Id": "retroarch",
+      "Name": "RetroArch para Xbox 360",
+      "Purpose": "Frontend opcional para emulación de sistemas clásicos.",
+      "SourceUrl": "https://github.com/libretro/RetroArch",
+      "SourceLabel": "Repositorio oficial de Libretro",
+      "CompatibilityNote": "La compatibilidad y rendimiento varían por núcleo; el toolkit no lo etiqueta como perfecto ni incluye ROMs/BIOS.",
+      "Required": false
+    }
+  ],
+  "Games": [
+    { "Id":"gta-v", "Title":"Grand Theft Auto V", "FolderName":"GTA V", "Layout":"MultiDisc", "Note":"Reserva Disc 1 y Disc 2." },
+    { "Id":"halo-4", "Title":"Halo 4", "FolderName":"Halo 4", "Layout":"MultiDisc", "Note":"Reserva Disc 1 y Disc 2." },
+    { "Id":"gta-iv", "Title":"Grand Theft Auto IV", "FolderName":"GTA IV", "Layout":"GameWithDlc", "Note":"Reserva juego y referencia de Content/DLC." },
+    { "Id":"rdr", "Title":"Red Dead Redemption", "FolderName":"Red Dead Redemption", "Layout":"SingleDisc", "Note":"Carpeta estándar de juego." },
+    { "Id":"skyrim", "Title":"The Elder Scrolls V: Skyrim", "FolderName":"Skyrim", "Layout":"GameWithDlc", "Note":"Carpeta de juego; DLC se organiza por separado en Content." },
+    { "Id":"forza-horizon", "Title":"Forza Horizon", "FolderName":"Forza Horizon", "Layout":"SingleDisc", "Note":"Carpeta estándar de juego." },
+    { "Id":"gears-3", "Title":"Gears of War 3", "FolderName":"Gears of War 3", "Layout":"SingleDisc", "Note":"Carpeta estándar de juego." },
+    { "Id":"bo2", "Title":"Call of Duty: Black Ops II", "FolderName":"Call of Duty Black Ops II", "Layout":"SingleDisc", "Note":"Carpeta estándar de juego." }
+  ]
+}
