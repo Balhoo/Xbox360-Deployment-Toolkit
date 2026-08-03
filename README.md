@@ -4,7 +4,7 @@ Aplicación WPF para Windows que guía y documenta la preparación responsable d
 
 ## Alcance del MVP
 
-1. Checklist persistente por fases, notas, progreso y auditoría.
+1. Subchecklist de preparación y checklist persistente por fases, notas, progreso y auditoría.
 2. Detección de unidades, espacio disponible y creación segura de carpetas (dry-run por defecto; nunca formatea ni borra).
 3. FTP para Aurora/XeXMenu: listar, cargar un archivo y verificar su tamaño remoto.
 4. Manifiestos JSON para GTA V y Halo 4 multidisco, GTA IV + DLC, Xbox clásico y emuladores; validación local y reportes JSON/CSV.
@@ -34,11 +34,12 @@ dotnet run --project .\src\Xbox360DeploymentToolkit\Xbox360DeploymentToolkit.csp
 ## Uso seguro
 
 1. Abre la app y conserva **Modo simulación** activo.
-2. Completa el checklist de preparación, auditoría y respaldo.
-3. Elige la unidad/carpeta y simula la estructura. Revisa el destino antes de desactivar dry-run.
-4. En FTP, usa la IP de la consola y credenciales del servidor de Aurora/XeXMenu. La opción “Recordar” cifra la credencial con DPAPI para el usuario actual de Windows.
-5. Edita `Configuration/games.json` para que las rutas coincidan con tus archivos legítimos.
-6. Valida y exporta el reporte.
+2. Completa la pestaña **Preparación**, que separa hardware, herramientas, contenido propio y elementos opcionales.
+3. Continúa con el checklist de procedimiento, auditoría y respaldo.
+4. Elige la unidad/carpeta y simula la estructura. Revisa el destino antes de desactivar dry-run.
+5. En FTP, usa la IP de la consola y credenciales del servidor de Aurora/XeXMenu. La opción “Recordar” cifra la credencial con DPAPI para el usuario actual de Windows.
+6. Edita `Configuration/games.json` para que las rutas coincidan con tus archivos legítimos.
+7. Valida y exporta el reporte.
 
 Los datos del usuario, credenciales protegidas, logs y reportes se guardan en `%LOCALAPPDATA%\Xbox360DeploymentToolkit`.
 

@@ -1,0 +1,85 @@
+{
+  "Items": [
+    {
+      "Id": "hardware-console",
+      "Category": "Hardware",
+      "Name": "Xbox 360 con RGH funcional",
+      "Purpose": "Consola que arranque normalmente y permita iniciar XeLL o un dashboard homebrew ya autorizado.",
+      "SourceGuidance": "No es una descarga. Confirma el estado de la consola antes de modificar almacenamiento.",
+      "Destination": "Consola",
+      "Required": true
+    },
+    {
+      "Id": "hardware-usb",
+      "Category": "Hardware",
+      "Name": "Memoria USB de prueba",
+      "Purpose": "Mover archivos pequeños y validar el flujo antes de utilizar el HDD principal.",
+      "SourceGuidance": "No es una descarga. Usa una unidad propia y respalda su contenido.",
+      "Destination": "USB preparado por el usuario",
+      "Required": true
+    },
+    {
+      "Id": "aurora-package",
+      "Category": "Dashboard",
+      "Name": "Paquete de Aurora aportado por el usuario",
+      "Purpose": "Dashboard para organizar y ejecutar contenido propio desde la consola.",
+      "SourceGuidance": "Obtén una versión legítima desde el proyecto o comunidad oficial que tú verifiques. El toolkit no la descarga ni redistribuye.",
+      "Destination": "Aurora/",
+      "Required": true
+    },
+    {
+      "Id": "file-manager",
+      "Category": "Utilidad",
+      "Name": "XeXMenu u otro gestor ya autorizado",
+      "Purpose": "Permitir el primer acceso a archivos cuando Aurora todavía no esté configurado.",
+      "SourceGuidance": "Usa únicamente una copia cuya procedencia y derecho de uso puedas verificar.",
+      "Destination": "USB o Content/, según el formato legítimo disponible",
+      "Required": false
+    },
+    {
+      "Id": "dashlaunch-package",
+      "Category": "Configuración",
+      "Name": "DashLaunch aportado por el usuario",
+      "Purpose": "Configurar el dashboard de inicio y opciones compatibles con la consola.",
+      "SourceGuidance": "Verifica compatibilidad con tu kernel y procedencia antes de añadirlo. No se descarga automáticamente.",
+      "Destination": "Homebrew/DashLaunch/",
+      "Required": false
+    },
+    {
+      "Id": "owned-games",
+      "Category": "Contenido propio",
+      "Name": "Respaldos legítimos de juegos solicitados",
+      "Purpose": "Archivos locales que serán validados mediante games.json.",
+      "SourceGuidance": "Genera o aporta tus propias copias legales. No descargues juegos desde el toolkit.",
+      "Destination": "Games/<Título>/",
+      "Required": true
+    },
+    {
+      "Id": "owned-dlc",
+      "Category": "Contenido propio",
+      "Name": "DLC de GTA IV adquirido por el usuario",
+      "Purpose": "Validar el contenido adicional solicitado para GTA IV.",
+      "SourceGuidance": "Utiliza únicamente contenido asociado a tu cuenta, medio o respaldo legítimo.",
+      "Destination": "Content/0000000000000000/<TitleId>/",
+      "Required": false
+    },
+    {
+      "Id": "classic-compat",
+      "Category": "Opcional",
+      "Name": "Archivos de compatibilidad Xbox clásico",
+      "Purpose": "Habilitar la fase opcional de compatibilidad con juegos originales propios.",
+      "SourceGuidance": "Elemento sensible: el usuario debe verificar legalidad, procedencia y compatibilidad. El toolkit solo reserva la estructura.",
+      "Destination": "Compatibility/",
+      "Required": false
+    },
+    {
+      "Id": "emulators-package",
+      "Category": "Opcional",
+      "Name": "Emuladores legales seleccionados",
+      "Purpose": "Añadir emuladores permitidos sin incluir ROMs, BIOS ni contenido de terceros.",
+      "SourceGuidance": "Descarga únicamente desde el proyecto oficial del emulador y revisa su licencia.",
+      "Destination": "Emulators/<Nombre>/",
+      "Required": false
+    }
+  ]
+}

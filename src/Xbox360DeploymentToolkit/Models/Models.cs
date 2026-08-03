@@ -35,8 +35,22 @@ public sealed class GameItem : ObservableObject
     private string _validation = "Sin verificar"; public string Validation { get => _validation; set => Set(ref _validation, value); }
 }
 
+public sealed class PreparationItem : ObservableObject
+{
+    public required string Id { get; init; }
+    public required string Category { get; init; }
+    public required string Name { get; init; }
+    public string Purpose { get; init; } = "";
+    public string SourceGuidance { get; init; } = "";
+    public string Destination { get; init; } = "";
+    public bool Required { get; init; } = true;
+    private bool _isReady; public bool IsReady { get => _isReady; set => Set(ref _isReady, value); }
+    private string _notes = ""; public string Notes { get => _notes; set => Set(ref _notes, value); }
+}
+
 public sealed record FtpEntry(string Name, string FullPath, bool IsDirectory, long? Size);
 public sealed record AuditRecord(DateTime Timestamp, string Category, string Message, string Result);
 public sealed class ToolkitSettings { public string ReportFolder { get; set; } = "reports"; public bool DryRun { get; set; } = true; public string DefaultLocalRoot { get; set; } = ""; public string DefaultRemoteRoot { get; set; } = "/Hdd1"; }
 public sealed class ProcedureDefinition { public List<ChecklistStep> Steps { get; set; } = []; }
 public sealed class GamesDefinition { public List<GameItem> Games { get; set; } = []; }
+public sealed class PreparationDefinition { public List<PreparationItem> Items { get; set; } = []; }
