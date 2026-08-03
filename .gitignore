@@ -2,4 +2,6 @@ bin/
 obj/
 dist/
 .vs/
+.build-appdata/
+.packages/
 *.user
