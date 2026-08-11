@@ -19,9 +19,11 @@ public sealed class ChecklistStep : ObservableObject
     public string Instructions { get; init; } = "";
     public string Warning { get; init; } = "";
     public string[] DependsOn { get; init; } = [];
-    private bool _isComplete; public bool IsComplete { get => _isComplete; set { if (Set(ref _isComplete, value)) Raise(nameof(Status)); } }
+    private bool _isComplete; public bool IsComplete { get => _isComplete; set { if (Set(ref _isComplete, value)) { Raise(nameof(Status)); Raise(nameof(IsPending)); } } }
+    private bool _isActive; public bool IsActive { get => _isActive; set { if (Set(ref _isActive, value)) Raise(nameof(Status)); } }
+    public bool IsPending => !IsComplete;
     private string _notes = ""; public string Notes { get => _notes; set => Set(ref _notes, value); }
-    public string Status => IsComplete ? "Completado" : "Pendiente";
+    public string Status => IsComplete ? "Completado" : IsActive ? "En proceso" : "Pendiente";
 }
 
 public sealed class GameItem : ObservableObject
@@ -31,6 +33,9 @@ public sealed class GameItem : ObservableObject
     public string Type { get; init; } = "SingleDisc";
     public string[] RequiredPaths { get; init; } = [];
     public string Notes { get; init; } = "";
+    public bool HasDlc { get; init; }
+    public string ContentFormat { get; init; } = "Carpeta extraída / GOD compatible con Aurora";
+    public string Platform { get; init; } = "Xbox 360";
     private string _state = "Pendiente"; public string State { get => _state; set => Set(ref _state, value); }
     private string _validation = "Sin verificar"; public string Validation { get => _validation; set => Set(ref _validation, value); }
 }

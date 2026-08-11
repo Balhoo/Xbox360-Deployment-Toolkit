@@ -1,18 +1,249 @@
 <UserControl x:Class="Xbox360DeploymentToolkit.EmbeddedWizardView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-    <Grid Margin="0,0,0,16"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="260"/></Grid.ColumnDefinitions><StackPanel><TextBlock x:Name="StepLabel" Text="Step 1 of 6" Style="{StaticResource Caption}"/><TextBlock x:Name="StepTitle" Text="Consola" FontSize="20" FontWeight="SemiBold" Margin="0,4,0,0"/></StackPanel><ProgressBar Grid.Column="1" x:Name="StepProgress" Value="16" VerticalAlignment="Center"/></Grid>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Grid Margin="0,0,0,16">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="260" />
+      </Grid.ColumnDefinitions>
+      <StackPanel>
+        <TextBlock x:Name="StepLabel" Text="Step 1 of 6" Style="{StaticResource Caption}" />
+        <TextBlock x:Name="StepTitle" Text="Consola" FontSize="20" FontWeight="SemiBold" Margin="0,4,0,0" />
+      </StackPanel>
+      <ProgressBar Grid.Column="1" x:Name="StepProgress" Value="16" VerticalAlignment="Center" />
+    </Grid>
     <TabControl Grid.Row="1" x:Name="Steps">
-      <TabItem><ScrollViewer VerticalScrollBarVisibility="Auto"><Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions><StackPanel Margin="0,0,12,0"><Border Style="{StaticResource Card}"><StackPanel><TextBlock Text="Identificación de consola" Style="{StaticResource CardTitle}"/><TextBlock Text="Modelo" Style="{StaticResource Caption}"/><ComboBox x:Name="ConsoleModelBox" SelectedIndex="0"><ComboBoxItem Content="Sin confirmar"/><ComboBoxItem Content="Xbox 360 Fat"/><ComboBoxItem Content="Xbox 360 Slim"/><ComboBoxItem Content="Xbox 360 E"/></ComboBox><TextBlock Text="Capacidad interna" Style="{StaticResource Caption}"/><ComboBox x:Name="InternalCapacityBox" SelectedIndex="0"><ComboBoxItem Content="Sin confirmar"/><ComboBoxItem Content="4 GB"/><ComboBoxItem Content="20 GB"/><ComboBoxItem Content="60 GB"/><ComboBoxItem Content="120 GB"/><ComboBoxItem Content="250 GB"/><ComboBoxItem Content="320 GB"/><ComboBoxItem Content="500 GB"/><ComboBoxItem Content="Otra"/></ComboBox><TextBlock Text="Estado de Xbox Live" Style="{StaticResource Caption}"/><ComboBox x:Name="LiveStatusBox" SelectedIndex="0"><ComboBoxItem Content="Sin confirmar / no se conectará"/><ComboBoxItem Content="No baneada"/><ComboBoxItem Content="Baneada"/></ComboBox></StackPanel></Border></StackPanel><StackPanel Grid.Column="1" Margin="12,0,0,0"><Border Style="{StaticResource Card}"><StackPanel><TextBlock Text="Evidencia de RGH" Style="{StaticResource CardTitle}"/><TextBlock Text="Método de confirmación" Style="{StaticResource Caption}"/><ComboBox x:Name="RghConfirmationBox" SelectedIndex="0"><ComboBoxItem Content="Sin confirmar: se requiere auditoría"/><ComboBoxItem Content="Confirmado: arranca XeLL con Eject"/><ComboBoxItem Content="Confirmado: ejecuta Aurora/XeXMenu/homebrew"/><ComboBoxItem Content="Pendiente: analizar NAND + CPU Key"/><ComboBoxItem Content="No ejecuta XeLL ni homebrew"/></ComboBox><TextBlock Text="Kernel/dashboard" Style="{StaticResource Caption}"/><TextBox x:Name="KernelVersionBox" Text="Sin confirmar"/><TextBlock Text="NAND" Style="{StaticResource Caption}"/><ComboBox x:Name="NandStatusBox" SelectedIndex="0"><ComboBoxItem Content="No disponible"/><ComboBoxItem Content="Flash dump y CPU Key disponibles"/><ComboBoxItem Content="Solo CPU Key disponible"/><ComboBoxItem Content="Se obtendrá desde XeLL en modo lectura"/></ComboBox><TextBlock Text="Subtipo opcional" Style="{StaticResource Caption}"/><ComboBox x:Name="HackTypeBox" SelectedIndex="0"><ComboBoxItem Content="RGH/JTAG — subtipo no necesario"/><ComboBoxItem Content="RGH con chip — detalle no confirmado"/><ComboBoxItem Content="RGH sin chip — detalle no confirmado"/><ComboBoxItem Content="JTAG conocido"/></ComboBox></StackPanel></Border></StackPanel></Grid></ScrollViewer></TabItem>
-      <TabItem><StackPanel><Border Style="{StaticResource Card}"><StackPanel><TextBlock Text="Punto de partida" Style="{StaticResource CardTitle}"/><TextBlock Text="Tipo de deployment" Style="{StaticResource Caption}"/><ComboBox x:Name="InstallationModeBox" SelectedIndex="0"><ComboBoxItem Content="Instalación limpia"/><ComboBoxItem Content="Migración de dashboard o almacenamiento"/><ComboBoxItem Content="Reparación / completar instalación existente"/><ComboBoxItem Content="Solo auditoría y reporte"/></ComboBox><TextBlock Text="Componentes que ya tiene la consola" Style="{StaticResource Caption}"/><TextBox x:Name="ExistingComponentsBox" Height="130" AcceptsReturn="True" TextWrapping="Wrap"/></StackPanel></Border><Border Style="{StaticResource InfoBanner}"><TextBlock Text="ⓘ  El procedimiento se adapta a esta selección; no elimina ni reemplaza archivos automáticamente."/></Border></StackPanel></TabItem>
-      <TabItem><ScrollViewer VerticalScrollBarVisibility="Auto"><UniformGrid Columns="2"><Border Style="{StaticResource Card}"><StackPanel><TextBlock Text="USB de staging" Style="{StaticResource CardTitle}"/><CheckBox x:Name="UseUsbCheck" Content="Usaré una USB de prueba" IsChecked="True"/><TextBlock Text="Capacidad en GB" Style="{StaticResource Caption}"/><TextBox x:Name="UsbCapacityBox" Text="16"/><TextBlock Text="16 GB o más es una recomendación operativa del toolkit, no un requisito universal." Style="{StaticResource Caption}"/></StackPanel></Border><Border Style="{StaticResource Card}"><StackPanel><TextBlock Text="Biblioteca y respaldos" Style="{StaticResource CardTitle}"/><CheckBox x:Name="UseExternalCheck" Content="Usaré HDD/SSD externo"/><TextBox x:Name="ExternalCapacityBox" ToolTip="Capacidad externa"/><CheckBox x:Name="UsePcCheck" Content="Mantendré biblioteca en esta PC" IsChecked="True"/><DockPanel><Button Content="Elegir" Click="ChooseFolder_Click" DockPanel.Dock="Right"/><TextBox x:Name="PcLibraryPathBox" FontFamily="Cascadia Mono"/></DockPanel></StackPanel></Border></UniformGrid></ScrollViewer></TabItem>
-      <TabItem><Grid><Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions><DataGrid x:Name="ComponentsGrid" AutoGenerateColumns="False"><DataGrid.Columns><DataGridCheckBoxColumn Header="Usar" Binding="{Binding Selected}" Width="55"/><DataGridTextColumn Header="Componente" Binding="{Binding Name}" Width="160"/><DataGridTextColumn Header="Propósito" Binding="{Binding Purpose}" Width="*"/><DataGridTextColumn Header="Fuente" Binding="{Binding SourceLabel}" Width="220"/><DataGridTextColumn Header="Archivo propio" Binding="{Binding LocalFile}" Width="220"/></DataGrid.Columns></DataGrid><StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,0"><Button Content="Abrir fuente" Click="OpenSource_Click"/><Button Content="Elegir archivo propio" Click="ChooseComponent_Click"/></StackPanel></Grid></TabItem>
-      <TabItem><Grid><Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions><DataGrid x:Name="GamesGrid" AutoGenerateColumns="False"><DataGrid.Columns><DataGridCheckBoxColumn Header="Agregar" Binding="{Binding Selected}" Width="65"/><DataGridTextColumn Header="Título" Binding="{Binding Title}" Width="*"/><DataGridTextColumn Header="Estructura" Binding="{Binding Layout}" Width="140"/><DataGridTextColumn Header="Carpeta" Binding="{Binding FolderName}" Width="220"/><DataGridTextColumn Header="Nota" Binding="{Binding Note}" Width="2*"/></DataGrid.Columns></DataGrid><DockPanel Grid.Row="1" Margin="0,12,0,0"><Button Content="Agregar título" Click="AddGame_Click" DockPanel.Dock="Right"/><TextBox x:Name="CustomGameBox"/></DockPanel></Grid></TabItem>
-      <TabItem><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel><Border Style="{StaticResource Card}"><StackPanel><TextBlock Text="Plan de deployment" Style="{StaticResource CardTitle}"/><TextBlock x:Name="SummaryText" FontFamily="Cascadia Mono"/></StackPanel></Border><Border Style="{StaticResource InfoBanner}"><TextBlock Text="Al guardar, se registra el perfil. La estructura local solo se crea con confirmación dentro de este workspace."/></Border></StackPanel></ScrollViewer></TabItem>
+      <TabItem>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,12,0">
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="Identificación de consola" Style="{StaticResource CardTitle}" />
+                  <TextBlock Text="Modelo" Style="{StaticResource Caption}" />
+                  <ComboBox x:Name="ConsoleModelBox" SelectedIndex="0">
+                    <ComboBoxItem Content="Sin confirmar" />
+                    <ComboBoxItem Content="Xbox 360 Fat" />
+                    <ComboBoxItem Content="Xbox 360 Slim" />
+                    <ComboBoxItem Content="Xbox 360 E" />
+                  </ComboBox>
+                  <TextBlock Text="Capacidad interna" Style="{StaticResource Caption}" />
+                  <ComboBox x:Name="InternalCapacityBox" SelectedIndex="0">
+                    <ComboBoxItem Content="Sin confirmar" />
+                    <ComboBoxItem Content="4 GB" />
+                    <ComboBoxItem Content="20 GB" />
+                    <ComboBoxItem Content="60 GB" />
+                    <ComboBoxItem Content="120 GB" />
+                    <ComboBoxItem Content="250 GB" />
+                    <ComboBoxItem Content="320 GB" />
+                    <ComboBoxItem Content="500 GB" />
+                    <ComboBoxItem Content="Otra" />
+                  </ComboBox>
+                  <TextBlock Text="Estado de Xbox Live" Style="{StaticResource Caption}" />
+                  <ComboBox x:Name="LiveStatusBox" SelectedIndex="0">
+                    <ComboBoxItem Content="Sin confirmar / no se conectará" />
+                    <ComboBoxItem Content="No baneada" />
+                    <ComboBoxItem Content="Baneada" />
+                  </ComboBox>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="12,0,0,0">
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="Evidencia de RGH" Style="{StaticResource CardTitle}" />
+                  <TextBlock Text="Método de confirmación" Style="{StaticResource Caption}" />
+                  <ComboBox x:Name="RghConfirmationBox" SelectedIndex="0">
+                    <ComboBoxItem Content="Sin confirmar: se requiere auditoría" />
+                    <ComboBoxItem Content="Confirmado: arranca XeLL con Eject" />
+                    <ComboBoxItem Content="Confirmado: ejecuta Aurora/XeXMenu/homebrew" />
+                    <ComboBoxItem Content="Pendiente: analizar NAND + CPU Key" />
+                    <ComboBoxItem Content="No ejecuta XeLL ni homebrew" />
+                  </ComboBox>
+                  <TextBlock Text="Kernel/dashboard" Style="{StaticResource Caption}" />
+                  <TextBox x:Name="KernelVersionBox" Text="Sin confirmar" />
+                  <TextBlock Text="NAND" Style="{StaticResource Caption}" />
+                  <ComboBox x:Name="NandStatusBox" SelectedIndex="0">
+                    <ComboBoxItem Content="No disponible" />
+                    <ComboBoxItem Content="Flash dump y CPU Key disponibles" />
+                    <ComboBoxItem Content="Solo CPU Key disponible" />
+                    <ComboBoxItem Content="Se obtendrá desde XeLL en modo lectura" />
+                  </ComboBox>
+                  <TextBlock Text="Subtipo opcional" Style="{StaticResource Caption}" />
+                  <ComboBox x:Name="HackTypeBox" SelectedIndex="0">
+                    <ComboBoxItem Content="RGH/JTAG — subtipo no necesario" />
+                    <ComboBoxItem Content="RGH con chip — detalle no confirmado" />
+                    <ComboBoxItem Content="RGH sin chip — detalle no confirmado" />
+                    <ComboBoxItem Content="JTAG conocido" />
+                  </ComboBox>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </Grid>
+        </ScrollViewer>
+      </TabItem>
+      <TabItem>
+        <StackPanel>
+          <Border Style="{StaticResource Card}">
+            <StackPanel>
+              <TextBlock Text="Punto de partida" Style="{StaticResource CardTitle}" />
+              <TextBlock Text="Tipo de deployment" Style="{StaticResource Caption}" />
+              <ComboBox x:Name="InstallationModeBox" SelectedIndex="0">
+                <ComboBoxItem Content="Instalación limpia" />
+                <ComboBoxItem Content="Migración de dashboard o almacenamiento" />
+                <ComboBoxItem Content="Reparación / completar instalación existente" />
+                <ComboBoxItem Content="Solo auditoría y reporte" />
+              </ComboBox>
+              <TextBlock Text="Componentes que ya tiene la consola" Style="{StaticResource Caption}" />
+              <TextBox x:Name="ExistingComponentsBox" Height="130" AcceptsReturn="True" TextWrapping="Wrap" />
+              <TextBlock Text="Contenido que se preparará" Style="{StaticResource Caption}" Margin="0,12,0,4" />
+              <CheckBox x:Name="IncludeXbox360Check" Content="Juegos Xbox 360" IsChecked="True" />
+              <CheckBox x:Name="IncludeXboxClassicCheck" Content="Xbox clásico" />
+              <CheckBox x:Name="IncludeEmulatorsCheck" Content="Emuladores" />
+            </StackPanel>
+          </Border>
+          <Border Style="{StaticResource InfoBanner}">
+            <TextBlock Text="ⓘ  El procedimiento se adapta a esta selección; no elimina ni reemplaza archivos automáticamente." />
+          </Border>
+        </StackPanel>
+      </TabItem>
+      <TabItem>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <UniformGrid Columns="2">
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="USB de staging" Style="{StaticResource CardTitle}" />
+                <CheckBox x:Name="UseUsbCheck" Content="Usaré una USB de prueba" IsChecked="True" />
+                <TextBlock Text="Capacidad en GB" Style="{StaticResource Caption}" />
+                <TextBox x:Name="UsbCapacityBox" Text="16" />
+                <TextBlock Text="16 GB o más es una recomendación operativa del toolkit, no un requisito universal." Style="{StaticResource Caption}" />
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Biblioteca y respaldos" Style="{StaticResource CardTitle}" />
+                <CheckBox x:Name="UseExternalCheck" Content="Usaré HDD/SSD externo" />
+                <TextBox x:Name="ExternalCapacityBox" ToolTip="Capacidad externa" />
+                <CheckBox x:Name="UsePcCheck" Content="Mantendré biblioteca en esta PC" IsChecked="True" />
+                <DockPanel>
+                  <Button Content="Elegir" Click="ChooseFolder_Click" DockPanel.Dock="Right" />
+                  <TextBox x:Name="PcLibraryPathBox" FontFamily="Cascadia Mono" />
+                </DockPanel>
+              </StackPanel>
+            </Border>
+          </UniformGrid>
+        </ScrollViewer>
+      </TabItem>
+      <TabItem>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <DataGrid x:Name="ComponentsGrid" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+              <DataGridCheckBoxColumn Header="Usar" Binding="{Binding Selected}" Width="55" />
+              <DataGridTextColumn Header="Componente" Binding="{Binding Name}" Width="160" />
+              <DataGridTextColumn Header="Propósito" Binding="{Binding Purpose}" Width="*" />
+              <DataGridTextColumn Header="Fuente" Binding="{Binding SourceLabel}" Width="220" />
+              <DataGridTextColumn Header="Archivo propio" Binding="{Binding LocalFile}" Width="220" />
+            </DataGrid.Columns>
+          </DataGrid>
+          <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,0">
+            <Button Content="Abrir fuente" Click="OpenSource_Click" />
+            <Button Content="Elegir archivo propio" Click="ChooseComponent_Click" />
+          </StackPanel>
+        </Grid>
+      </TabItem>
+      <TabItem>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <DataGrid x:Name="GamesGrid" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+              <DataGridCheckBoxColumn Header="Agregar" Binding="{Binding Selected}" Width="65" />
+              <DataGridTextColumn Header="Título" Binding="{Binding Title}" Width="*" />
+              <DataGridTextColumn Header="Estructura" Binding="{Binding Layout}" Width="140" />
+              <DataGridTextColumn Header="Carpeta" Binding="{Binding FolderName}" Width="220" />
+              <DataGridTextColumn Header="Nota" Binding="{Binding Note}" Width="2*" />
+            </DataGrid.Columns>
+          </DataGrid>
+          <DockPanel Grid.Row="1" Margin="0,12,0,0">
+            <Button Content="Agregar título" Click="AddGame_Click" DockPanel.Dock="Right" />
+            <TextBox x:Name="CustomGameBox" />
+          </DockPanel>
+        </Grid>
+      </TabItem>
+      <TabItem>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Plan de deployment" Style="{StaticResource CardTitle}" />
+                <TextBlock x:Name="SummaryText" FontFamily="Cascadia Mono" />
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource InfoBanner}">
+              <TextBlock Text="Al guardar, se registra el perfil. La estructura local solo se crea con confirmación dentro de este workspace." />
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
     </TabControl>
-    <Grid Grid.Row="2" Margin="0,16,0,0"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock x:Name="InlineStatus" Foreground="{StaticResource SecondaryTextBrush}" VerticalAlignment="Center"/><StackPanel Grid.Column="1" Orientation="Horizontal"><Button x:Name="BackButton" Content="Anterior" Click="Back_Click"/><Button x:Name="NextButton" Content="Siguiente" Click="Next_Click" Style="{StaticResource PrimaryButton}"/><Button x:Name="SaveButton" Content="Guardar plan" Click="Save_Click" Style="{StaticResource PrimaryButton}" Visibility="Collapsed"/></StackPanel></Grid>
+    <Grid x:Name="WizardFooter" Grid.Row="2" Margin="0,16,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <TextBlock x:Name="InlineStatus" Foreground="{StaticResource SecondaryTextBrush}" VerticalAlignment="Center" />
+      <StackPanel Grid.Column="1" Orientation="Horizontal">
+        <Button x:Name="BackButton" Content="Anterior" Click="Back_Click" />
+        <Button x:Name="NextButton" Content="Siguiente" Click="Next_Click" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" />
+        <Button x:Name="SaveButton" Content="Guardar plan" Click="Save_Click" Style="{StaticResource PrimaryButton}" Visibility="Collapsed" Margin="8,0,0,0" />
+      </StackPanel>
+    </Grid>
     <!-- Inline verification decision; never creates another window -->
-    <Grid x:Name="Gate" Grid.RowSpan="3" Background="#E60F1115" Visibility="Collapsed" Panel.ZIndex="20"><Border Width="620" Padding="24" CornerRadius="10" Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource WarningBrush}" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"><StackPanel><TextBlock Text="RGH todavía no está verificado" FontSize="22" FontWeight="SemiBold"/><TextBlock Text="Puedes preparar requisitos, pero antes de avanzar elige cómo tratar esta condición." Margin="0,12"/><Border Style="{StaticResource WarningBanner}"><TextBlock Text="Verificación segura: intenta XeLL con Eject o analiza NAND + CPU Key en modo lectura. No flashes la NAND durante esta comprobación."/></Border><Button Content="Volver y verificar de forma segura" Click="GateSafe_Click" Style="{StaticResource PrimaryButton}"/><Button Content="Continuar bajo mi responsabilidad" Click="GateRisk_Click"/><Button Content="Cancelar" Click="GateCancel_Click"/></StackPanel></Border></Grid>
-    <!-- Inline confirmation for creating folders -->
-    <Grid x:Name="Confirm" Grid.RowSpan="3" Background="#E60F1115" Visibility="Collapsed" Panel.ZIndex="21"><Border Width="620" Padding="24" CornerRadius="10" Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"><StackPanel><TextBlock Text="Crear estructura local" FontSize="22" FontWeight="SemiBold"/><TextBlock Text="Destino" Style="{StaticResource Caption}" Margin="0,16,0,0"/><TextBlock x:Name="ConfirmPath" FontFamily="Cascadia Mono" Margin="0,4,0,16"/><TextBlock Text="Se crearán carpetas vacías para staging, herramientas, respaldos, juegos, contenido, emuladores y reportes. No se borrará ni copiará ningún archivo."/><StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0"><Button Content="Cancelar" Click="ConfirmCancel_Click"/><Button Content="Crear carpetas y guardar" Click="ConfirmCreate_Click" Style="{StaticResource PrimaryButton}"/></StackPanel></StackPanel></Border></Grid>
+    <Grid x:Name="Gate" Grid.RowSpan="3" Background="{StaticResource Xdt.Brush.Overlay}" Visibility="Collapsed" Panel.ZIndex="20">
+      <Border Width="640" Padding="24" CornerRadius="{StaticResource Xdt.Radius.Large}" Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource WarningBrush}" BorderThickness="1" Effect="{StaticResource Xdt.Elevation.Level2}" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel>
+          <TextBlock Text="RGH todavía no está verificado" Style="{StaticResource PageTitle}" />
+          <TextBlock Text="Puedes preparar requisitos, pero antes de avanzar elige cómo tratar esta condición." Margin="0,12" />
+          <Border Style="{StaticResource WarningBanner}">
+            <TextBlock Text="Verificación segura: intenta XeLL con Eject o analiza NAND + CPU Key en modo lectura. No flashes la NAND durante esta comprobación." />
+          </Border>
+          <Button Content="Volver y verificar de forma segura" Click="GateSafe_Click" Style="{StaticResource PrimaryButton}" />
+          <Button Content="Continuar bajo mi responsabilidad" Click="GateRisk_Click" Margin="0,8,0,0" />
+          <Button Content="Cancelar" Click="GateCancel_Click" Style="{StaticResource GhostButton}" Margin="0,8,0,0" />
+        </StackPanel>
+      </Border>
+    </Grid>
+    <!-- Folder creation is confirmed inline; only verification gates use an overlay. -->
+    <Border x:Name="Confirm" Grid.Row="2" Visibility="Collapsed" Style="{StaticResource WarningBanner}" Margin="0,16,0,0">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+          <TextBlock Text="Crear estructura local" FontWeight="SemiBold" />
+          <TextBlock x:Name="ConfirmPath" FontFamily="{StaticResource Xdt.Font.Mono}" Margin="0,4,0,4" />
+          <TextBlock Text="Se crearán carpetas vacías; no se borrará ni copiará ningún archivo." Style="{StaticResource Caption}" />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+          <Button Content="Cancelar" Click="ConfirmCancel_Click" />
+          <Button Content="Crear carpetas y guardar" Click="ConfirmCreate_Click" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" />
+        </StackPanel>
+      </Grid>
+    </Border>
   </Grid>
 </UserControl>

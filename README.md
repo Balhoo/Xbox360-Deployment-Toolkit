@@ -6,7 +6,7 @@ Aplicación WPF para Windows que guía y documenta la preparación responsable d
 
 1. Primera ejecución guiada: diagnóstico de consola, modalidad de instalación, almacenamiento, componentes y juegos.
 2. Subchecklist de preparación y checklist persistente por fases, notas, progreso y auditoría.
-3. Detección de unidades, espacio disponible y creación segura de carpetas (dry-run por defecto; nunca formatea ni borra).
+3. Detección de unidades, espacio disponible y creación segura de carpetas; nunca formatea ni borra.
 4. FTP para Aurora/XeXMenu: listar, cargar un archivo y verificar su tamaño remoto.
 5. Catálogo JSON para títulos conocidos y personalizados; estructura multidisco, contenido y reportes JSON/CSV.
 
@@ -15,7 +15,7 @@ Fuera del MVP: formateo de discos, instalación automática de dashboards, desca
 ## Requisitos y build
 
 - Windows 10/11 x64.
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (el runtime por sí solo no compila).
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0); el runtime por sí solo no compila.
 
 Desde PowerShell:
 
@@ -35,17 +35,15 @@ dotnet run --project .\src\Xbox360DeploymentToolkit\Xbox360DeploymentToolkit.csp
 ## Uso seguro
 
 1. Abre la app y conserva **Modo simulación** activo.
-2. En la primera ejecución, elige **Comenzar con el deployment** y completa el diagnóstico. También puedes explorar y reabrirlo con **Asistente inicial**.
-3. Revisa la pestaña **Preparación**, que separa hardware, herramientas, contenido propio y elementos opcionales.
+2. En la bienvenida elige **Comenzar preparación** para abrir el asistente o **Omitir preparación** para ir al Dashboard.
+3. Revisa **Preparación**, que separa hardware, herramientas, contenido propio y elementos opcionales.
 4. Continúa con el checklist de procedimiento, auditoría y respaldo.
-5. Elige la unidad/carpeta y simula la estructura. Revisa el destino antes de desactivar dry-run.
-6. En FTP, usa la IP de la consola y credenciales del servidor de Aurora/XeXMenu. La opción “Recordar” cifra la credencial con DPAPI para el usuario actual de Windows.
+5. Elige la unidad o carpeta y revisa el destino antes de cualquier operación.
+6. En FTP, usa la IP y credenciales del servidor de Aurora/XeXMenu. La opción **Recordar** cifra la credencial con DPAPI para el usuario actual de Windows.
 7. Edita `Configuration/games.json` para que las rutas coincidan con tus archivos.
 8. Valida y exporta el reporte.
 
-El perfil de onboarding se guarda en `%LOCALAPPDATA%\Xbox360DeploymentToolkit\deployment-profile.json`. La biblioteca opcional de PC contiene únicamente estructura vacía y una advertencia; el toolkit no descarga juegos, DLC, BIOS ni ROMs.
-
-Los datos del usuario, credenciales protegidas, logs y reportes se guardan en `%LOCALAPPDATA%\Xbox360DeploymentToolkit`.
+El perfil se guarda en `%LOCALAPPDATA%\Xbox360DeploymentToolkit\deployment-profile.json`. La biblioteca opcional de PC contiene únicamente estructura vacía y una advertencia.
 
 ## Arquitectura
 
@@ -53,10 +51,9 @@ Los datos del usuario, credenciales protegidas, logs y reportes se guardan en `%
 - `Services`: unidades, FTP, validación, credenciales, JSON, logs y reportes.
 - `ViewModels`: coordinación de la interfaz y comandos.
 - `Configuration`: procedimiento, catálogo y ajustes externos.
-- `MainWindow.xaml`: vista WPF sin lógica operativa.
-- `EmbeddedWizardView`: onboarding, perfil y confirmación RGH dentro del único AppShell.
-- `Presentation/Themes`: tokens y estilos del Design System oscuro.
+- `Presentation/DesignSystem`: tokens, estilos, temas y controles XDT compartidos.
+- `EmbeddedWizardView`: preparación inicial y confirmación de RGH dentro del App Shell.
 
-La aplicación utiliza una sola ventana. Confirmaciones y feedback se muestran mediante overlays y toasts internos; solo los selectores nativos de archivos/carpetas pueden abrirse aparte.
+La aplicación utiliza una sola ventana. La bienvenida se presenta en 800×600 y el workspace en 1440×900, con mínimo de 1200×720. Las verificaciones críticas permanecen dentro de la aplicación; solo los selectores nativos de archivos o carpetas pueden abrir ventanas externas.
 
-Consulta [docs/SECURITY.md](docs/SECURITY.md) y [docs/PORTFOLIO.md](docs/PORTFOLIO.md).
+Consulta [XDT Design System](docs/XDT-DESIGN-SYSTEM.md), [seguridad](docs/SECURITY.md) y [portafolio](docs/PORTFOLIO.md).

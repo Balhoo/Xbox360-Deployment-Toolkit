@@ -23,7 +23,11 @@ public sealed class DeploymentProfile
     public List<string> SelectedComponents { get; set; } = [];
     public Dictionary<string, string> ComponentFiles { get; set; } = [];
     public List<string> SelectedGames { get; set; } = [];
+    public bool IncludeXbox360Games { get; set; } = true;
+    public bool IncludeXboxClassic { get; set; }
+    public bool IncludeEmulators { get; set; }
     public bool OnboardingCompleted { get; set; }
+    public int WizardStepIndex { get; set; }
 }
 
 public sealed class WizardComponent : ObservableObject
@@ -46,6 +50,8 @@ public sealed class CatalogGame : ObservableObject
     public required string FolderName { get; init; }
     public string Layout { get; init; } = "SingleDisc";
     public string Note { get; init; } = "";
+    public bool HasDlc { get; init; }
+    public string FormatGuidance { get; init; } = "Carpeta extraída con default.xex o formato GOD";
     private bool _selected; public bool Selected { get => _selected; set => Set(ref _selected, value); }
 }
 

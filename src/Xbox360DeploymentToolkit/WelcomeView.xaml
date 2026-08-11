@@ -1,0 +1,26 @@
+<UserControl x:Class="Xbox360DeploymentToolkit.WelcomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:xdt="clr-namespace:Xbox360DeploymentToolkit.Presentation.DesignSystem.Controls">
+  <Grid Background="{StaticResource BackgroundBrush}">
+    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="640"/><ColumnDefinition/></Grid.ColumnDefinitions>
+    <Grid Grid.Column="1" Margin="{StaticResource Xdt.Thickness.32}" VerticalAlignment="Center">
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <StackPanel>
+        <Border Width="64" Height="64" CornerRadius="{StaticResource Xdt.Radius.Large}" Background="{StaticResource AccentBrush}" HorizontalAlignment="Left" Margin="0,0,0,24">
+          <TextBlock Text="XDT" Style="{StaticResource CardTitle}" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <TextBlock Text="Bienvenido a Xbox360 Deployment Toolkit" Style="{StaticResource DisplayText}"/>
+        <TextBlock Text="Prepara, valida y documenta el deployment de una consola Xbox 360 con RGH desde un solo espacio de trabajo." Style="{StaticResource PageSubtitle}" Margin="0,12,0,24"/>
+      </StackPanel>
+      <StackPanel Grid.Row="1">
+        <xdt:XdtButton Content="Comenzar preparación" Variant="Primary" ControlSize="Large" HorizontalContentAlignment="Left" Click="Start_Click"/>
+        <xdt:XdtButton Content="Omitir preparación e ir a Home" Variant="Secondary" ControlSize="Large" HorizontalContentAlignment="Left" Margin="0,8,0,0" Click="Skip_Click"/>
+        <xdt:XdtButton Content="Cancelar y cerrar" Variant="Danger" ControlSize="Large" HorizontalContentAlignment="Left" Margin="0,8,0,0" Click="Close_Click"/>
+      </StackPanel>
+      <Border Grid.Row="2" Style="{StaticResource InfoBanner}" Margin="0,24,0,0">
+        <TextBlock Text="XDT no proporciona juegos, DLC, firmware ni otros paquetes. Te ayuda a organizar, validar y transferir los archivos que tú agregues."/>
+      </Border>
+    </Grid>
+  </Grid>
+</UserControl>
