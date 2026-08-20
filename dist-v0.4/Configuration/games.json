@@ -1,9 +1,0 @@
-{
-  "Games": [
-    { "Id":"gta-v", "Title":"Grand Theft Auto V", "Type":"MultiDisc", "RequiredPaths":["Games/GTA V/Disc 1/default.xex","Games/GTA V/Disc 2/default.xex"], "Notes":"Placeholder multidisco; ajusta las rutas a los archivos agregados por el usuario." },
-    { "Id":"halo-4", "Title":"Halo 4", "Type":"MultiDisc", "RequiredPaths":["Games/Halo 4/Disc 1/default.xex","Games/Halo 4/Disc 2/default.xex"], "Notes":"Placeholder multidisco; no incluye archivos del juego." },
-    { "Id":"gta-iv", "Title":"Grand Theft Auto IV", "Type":"GameWithDlc", "RequiredPaths":["Games/GTA IV/default.xex","Content/0000000000000000/545407F2"], "Notes":"Valida juego y carpeta de contenido/DLC propia." },
-    { "Id":"xbox-classic", "Title":"Compatibilidad Xbox clásico", "Type":"Compatibility", "RequiredPaths":["Compatibility/README-PLACE-YOUR-LEGAL-FILES-HERE.txt"], "Notes":"No se incluyen archivos de compatibilidad." },
-    { "Id":"emulators", "Title":"Emuladores", "Type":"Emulator", "RequiredPaths":["Emulators/README-PLACE-YOUR-LEGAL-FILES-HERE.txt"], "Notes":"No se incluyen ROMs, BIOS ni software de terceros." }
-  ]
-}

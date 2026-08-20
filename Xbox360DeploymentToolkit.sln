@@ -4,6 +4,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbox360DeploymentToolkit", "src\Xbox360DeploymentToolkit\Xbox360DeploymentToolkit.csproj", "{8BEE191B-55FC-49EF-B50D-68DF7EA84917}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbox360DeploymentToolkit.Tests", "tests\Xbox360DeploymentToolkit.Tests\Xbox360DeploymentToolkit.Tests.csproj", "{B82A1E8B-7B1D-4B4D-9B55-5F3F8FB8D28E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,5 +16,9 @@ Global
 		{8BEE191B-55FC-49EF-B50D-68DF7EA84917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BEE191B-55FC-49EF-B50D-68DF7EA84917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BEE191B-55FC-49EF-B50D-68DF7EA84917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B82A1E8B-7B1D-4B4D-9B55-5F3F8FB8D28E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B82A1E8B-7B1D-4B4D-9B55-5F3F8FB8D28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B82A1E8B-7B1D-4B4D-9B55-5F3F8FB8D28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B82A1E8B-7B1D-4B4D-9B55-5F3F8FB8D28E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

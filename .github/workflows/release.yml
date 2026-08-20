@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    name: Package Windows x64 build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore and test
+        shell: pwsh
+        run: |
+          dotnet restore Xbox360DeploymentToolkit.sln --configfile NuGet.Config
+          dotnet test Xbox360DeploymentToolkit.sln --configuration Release --no-restore
+
+      - name: Publish application
+        shell: pwsh
+        run: dotnet publish src/Xbox360DeploymentToolkit/Xbox360DeploymentToolkit.csproj --configuration Release --runtime win-x64 --self-contained true --no-restore --output artifacts/Xbox360-Deployment-Toolkit
+
+      - name: Assemble release archive
+        shell: pwsh
+        run: |
+          Copy-Item README.md, CHANGELOG.md, LICENSE -Destination artifacts/Xbox360-Deployment-Toolkit -Force
+          Compress-Archive -Path artifacts/Xbox360-Deployment-Toolkit/* -DestinationPath artifacts/Xbox360-Deployment-Toolkit-win-x64.zip -CompressionLevel Optimal
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: artifacts/Xbox360-Deployment-Toolkit-win-x64.zip
+          generate_release_notes: true
+          fail_on_unmatched_files: true

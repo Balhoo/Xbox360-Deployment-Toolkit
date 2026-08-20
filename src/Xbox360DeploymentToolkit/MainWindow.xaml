@@ -27,7 +27,7 @@
               </Border>
               <StackPanel>
                 <TextBlock Text="Xbox360 Deployment Toolkit" FontWeight="SemiBold" />
-                  <TextBlock Text="v0.4" Style="{StaticResource Caption}" />
+                  <TextBlock Text="v0.5" Style="{StaticResource Caption}" />
               </StackPanel>
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
@@ -872,7 +872,7 @@
             <TextBlock Text="Warnings  0" Foreground="{StaticResource WarningBrush}" />
           </StatusBarItem>
           <StatusBarItem HorizontalAlignment="Right">
-            <TextBlock Text="XDT v0.4" />
+            <TextBlock Text="XDT v0.5" />
           </StatusBarItem>
         </StatusBar>
         <Grid x:Name="GameCatalogOverlay" Grid.RowSpan="3" Background="{StaticResource Xdt.Brush.Overlay}" Visibility="Collapsed" Panel.ZIndex="105">

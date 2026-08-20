@@ -15,10 +15,10 @@ public sealed class MainViewModel : ObservableObject
     public ObservableCollection<PreparationItem> PreparationItems { get; } = []; public ObservableCollection<ChecklistStep> Steps { get; } = []; public ObservableCollection<GameItem> Games { get; } = []; public ObservableCollection<CatalogGame> GameCatalog { get; } = []; public ObservableCollection<DriveInfoDto> Drives { get; } = []; public ObservableCollection<FtpEntry> FtpEntries { get; } = []; public ObservableCollection<AuditRecord> Audit { get; } = [];
     private string _status = "Listo"; public string Status { get => _status; set => Set(ref _status, value); }
     private string _localRoot = ""; public string LocalRoot { get => _localRoot; set => Set(ref _localRoot, value); }
-    private string _host = "192.168.1.25"; public string Host { get => _host; set => Set(ref _host, value); }
+    private string _host = ""; public string Host { get => _host; set => Set(ref _host, value); }
     private string _ftpPath = "/Hdd1"; public string FtpPath { get => _ftpPath; set => Set(ref _ftpPath, value); }
-    private string _username = "xbox"; public string Username { get => _username; set => Set(ref _username, value); }
-    private string _password = "xbox"; public string Password { get => _password; set => Set(ref _password, value); }
+    private string _username = ""; public string Username { get => _username; set => Set(ref _username, value); }
+    private string _password = ""; public string Password { get => _password; set => Set(ref _password, value); }
     private bool _rememberCredential; public bool RememberCredential { get => _rememberCredential; set => Set(ref _rememberCredential, value); }
     private bool _dryRun = true; public bool DryRun { get => _dryRun; set { if (Set(ref _dryRun, value)) Status = value ? "Modo simulación activo" : "Modo escritura activo: revisa cada destino"; } }
     private DriveInfoDto? _selectedDrive; public DriveInfoDto? SelectedDrive { get => _selectedDrive; set => Set(ref _selectedDrive, value); }

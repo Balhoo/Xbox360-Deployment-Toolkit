@@ -1,7 +1,17 @@
 bin/
 obj/
 dist/
+dist-*/
 .vs/
 .build-appdata/
 .packages/
+.dotnet/
+artifacts/
 *.user
+*.pdb
+*.exe
+*.zip
+*.pfx
+*.p12
+*.snk
+*.usersecrets
